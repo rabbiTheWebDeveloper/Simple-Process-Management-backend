@@ -12,17 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const app_1 = __importDefault(require("./app"));
-const logger_1 = require("./app/utlis/logger");
-const PORT = 6000;
-const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        app_1.default.listen(6000, () => {
-            logger_1.log.info(`🌐 Server started on port ${PORT}`);
-        });
-    }
-    catch (err) {
-        logger_1.log.error(err.message);
-    }
-});
-startServer();
+exports.ProcessController = void 0;
+const process_service_1 = require("./process.service");
+const catchAsync_1 = __importDefault(require("../../shared/catchAsync"));
+const sendResponse_1 = __importDefault(require("../../shared/sendResponse"));
+const http_status_1 = __importDefault(require("http-status"));
+const insertIntoDB = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // const user = req.headers.id;
+    // payload.userId = user;
+    const result = yield process_service_1.Processservice.insertIntoDB();
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: "Process Created successfully!",
+        data: result,
+    });
+}));
+exports.ProcessController = {
+    insertIntoDB,
+};

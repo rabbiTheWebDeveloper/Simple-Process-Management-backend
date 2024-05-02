@@ -6,6 +6,7 @@ import { adminRoutes } from "../modules/Admin/admin.router";
 import { BalanceRechargeRoutes } from "../modules/Balance-recharge/balance-recharge.route";
 import { WithdrawRoutes } from "../modules/Withdraw/withdraw.route";
 import { CashInRequestRoutes } from "../modules/CashInRequest/cash-in-request.route";
+import { processRoutes } from "../modules/Process/process.route";
 const router = express.Router();
 
 const moduleRoutes = [
@@ -36,6 +37,10 @@ const moduleRoutes = [
   {
     path: "/cash-in-request",
     route: CashInRequestRoutes,
+  },
+  {
+    path: "/process",
+    route: processRoutes,
   },
 ];
 
